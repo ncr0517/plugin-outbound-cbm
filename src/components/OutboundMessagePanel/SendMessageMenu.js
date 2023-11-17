@@ -16,22 +16,27 @@ const SendMessageMenu = (props) => {
       </MenuButton>
       <Menu {...menu} aria-label="Actions">
         <MenuItem {...menu} onClick={() => props.onClickHandler("OPEN_CHAT")}>
-          ....and open chat with customer
+          ....and open chat with customer (route reply to me)
         </MenuItem>
         <MenuSeparator />
-        <MenuItem
+        {/* <MenuItem
           {...menu}
           onClick={() => props.onClickHandler("SEND_MESSAGE_REPLY_ME")}
         >
           ....and open chat with customer when they reply (route reply to me)
-        </MenuItem>
-        <MenuSeparator />
+        </MenuItem> */}
         <MenuItem
           {...menu}
           onClick={() => props.onClickHandler("SEND_MESSAGE")}
         >
-          ....and open chat with customer when they reply (route reply to any
-          agent)
+          ....and send to pre-agent bot (route reply based off needs)
+        </MenuItem>
+        <MenuSeparator />
+        <MenuItem
+          {...menu}
+          onClick={() => props.onClickHandler("OVERRIDE")}
+        >
+          ....OVERRIDE OPEN CONV (double check no other agent)
         </MenuItem>
       </Menu>
     </>

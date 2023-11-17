@@ -110,9 +110,9 @@ const OutboundMessagePanel = (props) => {
                 <Radio id="sms" value="sms" name="sms">
                   SMS
                 </Radio>
-                <Radio id="whatsapp" value="whatsapp" name="whatsapp">
+                {/* <Radio id="whatsapp" value="whatsapp" name="whatsapp">
                   Whatsapp
-                </Radio>
+                </Radio> */}
               </RadioGroup>
               <Text
                 paddingTop={props.theme.tokens.spacings.space20}
