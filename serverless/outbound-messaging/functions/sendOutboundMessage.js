@@ -75,19 +75,6 @@ exports.handler = TokenValidator(async function (context, event, callback) {
     let customerConversation = undefined;
     let reusingExistingConversation = false;
 
-    // if(ForceCloseFlag){
-    //   //close all stale conversations for a user
-    //   await removeConversations(client, To);
-    //   // console.log("removing conversations");
-    //   // await client.conversations.v1.participantConversations
-    //   // .list({address: To, limit: 20})
-    //   // .then(participantConversations => participantConversations.forEach(p => 
-    //   //   {
-    //   //   client.conversations.v1.conversations(p.conversationSid)
-    //   //                      .remove();
-    //   //   }));
-    // }
-
     // either create a new conversation or if there is already an active conversation in progress
     // then get its details and depending on outbound scenario we may be able to re-use it
     const { newConversation, existingConversationDetails } =
@@ -113,7 +100,7 @@ exports.handler = TokenValidator(async function (context, event, callback) {
         if(ForceCloseFlag){
           //Force close old conversation and use a new one
           await client.conversations.v1.conversations(existingConversationDetails.conversation.sid).remove();
-          const { newConversation, existingConversationDetails } =
+          const { newConversation, existingConversationDetailsSecond } =
             await createOutboundCustomerConversation(client, WorkspaceSid, To, From);
           customerConversation = newConversation;
         } else {

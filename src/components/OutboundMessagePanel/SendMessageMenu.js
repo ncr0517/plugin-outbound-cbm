@@ -15,8 +15,17 @@ const SendMessageMenu = (props) => {
         Send message.... <ChevronDownIcon decorative />
       </MenuButton>
       <Menu {...menu} aria-label="Actions">
-        <MenuItem {...menu} onClick={() => props.onClickHandler("OPEN_CHAT")}>
-          ....and open chat with customer (route reply to me)
+        <MenuItem
+          {...menu}
+          // onClick={() => { 
+          //   props.onClickHandler("OVERRIDE");
+          //   if (window.confirm('Are you sure you want to delete the current conversation?')) {
+          //     props.onClickHandler("OVERRIDE");
+          //     }
+          //     }}
+          onClick={() => props.onClickHandler("OVERRIDE")}
+        >
+          OVERRIDE OPEN CONVO (DOUBLE CHECK UNUSED)
         </MenuItem>
         <MenuSeparator />
         {/* <MenuItem
@@ -29,15 +38,15 @@ const SendMessageMenu = (props) => {
           {...menu}
           onClick={() => props.onClickHandler("SEND_MESSAGE")}
         >
-          ....and send to pre-agent bot (route reply based off needs)
+          SEND TO PRE-AGENT BOT (ROUTE TO ANY AGENT)
         </MenuItem>
         <MenuSeparator />
-        <MenuItem
-          {...menu}
-          onClick={() => props.onClickHandler("OVERRIDE")}
-        >
-          ....OVERRIDE OPEN CONV (double check no other agent)
+        <MenuItem 
+        {...menu} 
+        onClick={() => props.onClickHandler("OPEN_CHAT")} >
+          OPEN CHAT WITH CUSTOMER (ROUTE TO ME)
         </MenuItem>
+        
       </Menu>
     </>
   );
