@@ -89,6 +89,7 @@ exports.createOutboundCustomerConversation = async (
           taskDirection,
           taskExists,
           agentName,
+          agentIdentity
         },
       };
     } else {

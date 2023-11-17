@@ -1,4 +1,5 @@
 import { Actions } from "@twilio/flex-ui";
+
 export const handleClose = () => {
   Actions.invokeAction("ToggleOutboundMessagePanel");
 };
@@ -19,6 +20,7 @@ export const onSendClickHandler = (
     body: messageBody,
     openChat: true,
     routeToMe: true,
+    forceClose: false
   };
 
   // defer opening a task until customer replies
@@ -32,6 +34,12 @@ export const onSendClickHandler = (
       payload.openChat = false;
       payload.routeToMe = false;
       break;
+    case "OVERRIDE":
+      payload.openChat = true;
+      payload.forceClose = true;
+      payload.routeToMe = true;
+      break;
+
   }
 
   Actions.invokeAction("SendOutboundMessage", payload);

@@ -30,9 +30,11 @@ const existingOpenConversationResponse = (
   to
 ) => {
   const direction = directionText(existingConversationDetails.taskDirection);
-  const agentName = existingConversationDetails.agentName
+  const agentName = (existingConversationDetails.agentName)
     ? ` with ${existingConversationDetails.agentName}`
-    : "";
+    : (existingConversationDetails.agentIdentity)
+        ? ` with ${existingConversationDetails.agentIdentity}`
+        : "";
 
   response.appendHeader("Content-Type", "application/json");
   response.setBody({
@@ -55,9 +57,10 @@ exports.handler = TokenValidator(async function (context, event, callback) {
     InboundStudioFlow,
   } = event;
 
-  let { OpenChatFlag, KnownAgentRoutingFlag } = event;
+  let { OpenChatFlag, KnownAgentRoutingFlag, ForceCloseFlag } = event;
   OpenChatFlag = OpenChatFlag === "true" ? true : false;
   KnownAgentRoutingFlag = KnownAgentRoutingFlag === "true" ? true : false;
+  ForceCloseFlag = ForceCloseFlag === "true" ? true : false;
 
   const client = context.getTwilioClient();
 
@@ -94,12 +97,20 @@ exports.handler = TokenValidator(async function (context, event, callback) {
         customerConversation = existingConversationDetails.conversation;
         reusingExistingConversation = true;
       } else {
-        return existingOpenConversationResponse(
-          callback,
-          response,
-          existingConversationDetails,
-          To
-        );
+        if(ForceCloseFlag){
+          //Force close old conversation and use a new one
+          await client.conversations.v1.conversations(existingConversationDetails.conversation.sid).remove();
+          const { newConversation, existingConversationDetailsSecond } =
+            await createOutboundCustomerConversation(client, WorkspaceSid, To, From);
+          customerConversation = newConversation;
+        } else {
+          return existingOpenConversationResponse(
+            callback,
+            response,
+            existingConversationDetails,
+            To
+          );
+        }
       }
     } else {
       customerConversation = newConversation;
