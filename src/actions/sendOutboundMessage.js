@@ -52,10 +52,11 @@ Actions.registerAction("SendOutboundMessage", (payload) => {
     payload.callerId = process.env.FLEX_APP_TWILIO_FROM_NUMBER;
 
   if (payload.openChat) {
-    // create a task immediately
+    //create a task immediately
     const sendOutboundParams = {
       OpenChatFlag: true,
       KnownAgentRoutingFlag: false,
+      ForceCloseFlag: !!payload.forceClose,
       To: payload.destination,
       From: payload.callerId,
       Body: payload.body,
@@ -72,6 +73,7 @@ Actions.registerAction("SendOutboundMessage", (payload) => {
     const sendOutboundParams = {
       OpenChatFlag: false,
       KnownAgentRoutingFlag: !!payload.routeToMe,
+      ForceCloseFlag: !!payload.forceClose,
       To: payload.destination,
       From: payload.callerId,
       Body: payload.body,
