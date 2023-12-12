@@ -1,6 +1,6 @@
 export const templates = [
   "",
-  "Hey there, this is Pleasant Pediatrics! Please provide patient name, requested date/time, location(s) & provider(s) to reschedule.",
-  "Hey there, this is a support agent from Pleasant Pediatrics! How can we help you today?",
-  "Hey there, this is a support agent from Pleasant Pediatrics! It looks like this bill is overdue.",
+  "Hi! This is ---- from Pleasant Pediatrics. Need to reschedule tomorrow's visit? Let us know your preferred date/time/location.",
+  "Pleasant Pediatrics: Your provider-ordered referral was sent to FACILITY-NAME at PHONE-#. Please call them to schedule. Thanks!",
+  "Pleasant Pediatrics: We have cancelled the appointment for -----. Please call/text us at 623-322-3380 to reschedule. Thanks!",
 ];
