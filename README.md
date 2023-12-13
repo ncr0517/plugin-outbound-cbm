@@ -121,6 +121,9 @@ twilio flex:plugins:start
 
 After testing the plugin locally you can deploy the plugin to your account using the [Flex Plugins CLI](https://www.twilio.com/docs/flex/developer/plugins/cli/deploy-and-release)
 
+twilio flex:plugins:deploy --changelog "Notes for this version"
+Run given command from deploy output
+
 ### Studio SendToFlex
 
 To handle the use case of inbound replies from the customer needing to create a task and optionally routing it to the agent that initiated the outbound message we will make use of the sendOutboundSMS function populating the converstations channel attributes.
